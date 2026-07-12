@@ -8,4 +8,5 @@ sqlalchemy>=2.0
 aiosqlite>=0.19
 itsdangerous>=2.1
 requests>=2.31.0
+deep_translator>=1.1.1
 
