@@ -214,6 +214,7 @@ class ResponseGenerator:
             snippet = genres_html + overview_html
 
             # Tarjeta completa
+            year_html = f' <span class="year">({year})</span>' if year else ""
             cards.append(
                 f'<div class="movie-card" style="animation-delay:{i*0.1}s">'
                 f'{img}'
@@ -221,7 +222,7 @@ class ResponseGenerator:
                 f'<div class="movie-card-header">'
                 f'<span class="medal">{medal}</span>'
                 f'<strong>{title}</strong>'
-                f'{f" <span class=\"year\">({year})</span>" if year else ""}'
+                f'{year_html}'
                 f'{badge}'
                 f'</div>'
                 f'<span class="fav-heart" data-id="{item["id"]}" title="Añadir a favoritos">♡</span>'
