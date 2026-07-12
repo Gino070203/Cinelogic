@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineLogic - Cartelera</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/css/style.css?v=18" rel="stylesheet">
+  <link href="/static/css/billboard.css?v=10" rel="stylesheet">
+  <link rel="shortcut icon" href="../static/logo.png" type="image/x-icon">
+</head>
+
+<body>
+
+  <header class="billboard-header">
+    <div class="container-fluid d-flex align-items-center justify-content-between px-4">
+      <div class="d-flex align-items-center gap-3">
+        <img src="../static/logo.png" alt="CineLogic" height="50px">
+        <h1 class="mb-0">CineLogic</h1>
+      </div>
+      <div class="nav-group" id="navGroup" style="display:none">
+        <a href="/favorites" id="btnFavsIndex">♥ Mis Favoritos</a>
+        <span class="nav-sep">|</span>
+        <a href="/logout" id="btnLogoutIndex">Cerrar sesión</a>
+      </div>
+
+    </div>
+  </header>
+
+  <main class="billboard-main">
+
+    <section class="hero-section">
+      <div class="hero-backdrop"></div>
+      <div class="hero-content">
+        <div class="hero-poster">
+          <img src="/static/posters/19995.jpg" alt="Avatar">
+        </div>
+        <div class="hero-info">
+          <h1 class="hero-title">Avatar</h1>
+          <div class="hero-meta">
+            <span class="hero-rating">7.2</span>
+            <span class="hero-sep">|</span>
+            <span class="hero-year">2009</span>
+            <span class="hero-sep">|</span>
+            <span class="hero-genre"><a href="/genre/ciencia-ficcion" class="genre-link">Ciencia Ficción</a>, <a href="/genre/aventura" class="genre-link">Aventura</a></span>
+          </div>
+          <p class="hero-overview">
+            Jake Sully, un exmarine en silla de ruedas, viaja a Pandora en una misión
+            que lo llevará a luchar por la supervivencia del pueblo Na'vi.
+          </p>
+          <a href="/chat" class="btn btn-cine hero-btn">
+            Preguntar por esta película
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TENDENCIAS -->
+    <section class="billboard-section">
+      <div class="section-header">
+        <h2>Tendencias</h2>
+      </div>
+      <div class="movie-row">
+
+        <div class="movie-card-billboard">
+          <div class="poster-wrapper">
+            <img src="/static/posters/19995.jpg" alt="Avatar" loading="lazy">
+            <span class="rating-badge-card">7.2</span>
+            <div class="card-overlay"><p>Jake Sully viaja a Pandora para luchar por la supervivencia del pueblo Na'vi.</p></div>
+          </div>
+          <div class="card-info">
+            <div class="card-title">Avatar</div>
+            <div class="card-meta"><span>2009</span></div>
+            <div class="card-genres"><a href="/genre/ciencia-ficcion" class="genre-link">Ciencia Ficcion</a>, <a href="/genre/aventura" class="genre-link">Aventura</a></div>
+          </div>
+        </div>
+
+        <div class="movie-card-billboard">
+          <div class="poster-wrapper">
+            <img src="/static/posters/49026.jpg" alt="The Dark Knight Rises" loading="lazy">
+            <span class="rating-badge-card">7.6</span>
+            <div class="card-overlay"><p>Batman resurge para enfrentar a Bane en una batalla por el destino de Gotham.</p></div>
+          </div>
+          <div class="card-info">
+            <div class="card-title">The Dark Knight Rises</div>
+            <div class="card-meta"><span>2012</span></div>
+            <div class="card-genres"><a href="/genre/accion" class="genre-link">Accion</a>, <a href="/genre/drama" class="genre-link">Drama</a></div>
+          </div>
+        </div>
+        <div class="movie-card-billboard">
+          <div class="poster-wrapper">
+            <img src="/static/posters/157336.jpg" alt="Interstellar" loading="lazy">
+            <span class="rating-badge-card">8.1</span>
+            <div class="card-overlay"><p>Un grupo de exploradores viaja a traves de un agujero de gusano en busca de un nuevo hogar.</p></div>
+          </div>
+          <div class="card-info">
+            <div class="card-title">Interstellar</div>
+            <div class="card-meta"><span>2014</span></div>
+            <div class="card-genres"><a href="/genre/ciencia-ficcion" class="genre-link">Ciencia Ficcion</a>, <a href="/genre/drama" class="genre-link">Drama</a></div>
+          </div>
+        </div>
+        <div class="movie-card-billboard">
+          <div class="poster-wrapper">
+            <img src="/static/posters/27205.jpg" alt="Inception" loading="lazy">
+            <span class="rating-badge-card">8.1</span>
+            <div class="card-overlay"><p>Un ladron especializado en robar secretos del subconsciente recibe una mision imposible.</p></div>
+          </div>
+          <div class="card-info">
+            <div class="card-title">Inception</div>
+            <div class="card-meta"><span>2010</span></div>
+            <div class="card-genres"><a href="/genre/accion" class="genre-link">Accion</a>, <a href="/genre/ciencia-ficcion" class="genre-link">Ciencia Ficcion</a></div>
+          </div>
+        </div>
+        <div class="movie-card-billboard">
+          <div class="poster-wrapper">
+            <img src="/static/posters/550.jpg" alt="Fight Club" loading="lazy">
+            <span class="rating-badge-card">8.3</span>
+            <div class="card-overlay"><p>Un hombre crea un club de peleas clandestino que pronto se sale de todo control.</p></div>
+          </div>
+          <div class="card-info">
+            <div class="card-title">Fight Club</div>
+            <div class="card-meta"><span>1999</span></div>
+            <div class="card-genres"><a href="/genre/drama" class="genre-link">Drama</a>, <a href="/genre/suspenso" class="genre-link">Suspenso</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEJOR CALIFICADAS -->
+    <section class="billboard-section">
+      <div class="section-header">
+        <h2>Mejor calificadas</h2>
+      </div>
+      <div class="movie-row">
+        <div class="movie-card-billboard">
+          <div class="poster-wrapper">
+            <img src="/static/posters/155.jpg" alt="The Dark Knight" loading="lazy">
+            <span class="rating-badge-card">8.2</span>
+            <div class="card-overlay"><p>Batman enfrenta al Joker, un caotico criminal que amenaza con destruir Gotham.</p></div>
+          </div>
+          <div class="card-info">
+            <div class="card-title">The Dark Knight</div>
+            <div class="card-meta"><span>2008</span></div>
+            <div class="card-genres"><a href="/genre/accion" class="genre-link">Accion</a>, <a href="/genre/crimen" class="genre-link">Crimen</a>, <a href="/genre/drama" class="genre-link">Drama</a></div>
+          </div>
+        </div>
+        <div class="movie-card-billboard">
+          <div class="poster-wrapper">
+            <img src="/static/posters/8587.jpg" alt="The Lion King" loading="lazy">
+            <span class="rating-badge-card">8.0</span>
+            <div class="card-overlay"><p>Un joven leon debe reclamar su lugar como rey de la sabana africana.</p></div>
+          </div>
+          <div class="card-info">
+            <div class="card-title">The Lion King</div>
+            <div class="card-meta"><span>1994</span></div>
+            <div class="card-genres"><a href="/genre/animacion" class="genre-link">Animacion</a>, <a href="/genre/aventura" class="genre-link">Aventura</a></div>
+          </div>
+        </div>
+        <div class="movie-card-billboard">
+          <div class="poster-wrapper">
+            <img src="/static/posters/150540.jpg" alt="Inside Out" loading="lazy">
+            <span class="rating-badge-card">8.0</span>
+            <div class="card-overlay"><p>Las emociones de una nina trabajan juntas para ayudarla a adaptarse a su nueva vida.</p></div>
+          </div>
+          <div class="card-info">
+            <div class="card-title">Inside Out</div>
+            <div class="card-meta"><span>2015</span></div>
+            <div class="card-genres"><a href="/genre/animacion" class="genre-link">Animacion</a>, <a href="/genre/comedia" class="genre-link">Comedia</a></div>
+          </div>
+        </div>
+        <div class="movie-card-billboard">
+          <div class="poster-wrapper">
+            <img src="/static/posters/122.jpg" alt="The Lord of the Rings: The Return of the King" loading="lazy">
+            <span class="rating-badge-card">8.1</span>
+            <div class="card-overlay"><p>La batalla final por la Tierra Media define el destino de todos los pueblos libres.</p></div>
+          </div>
+          <div class="card-info">
+            <div class="card-title">The Lord of the Rings: The Return of the King</div>
+            <div class="card-meta"><span>2003</span></div>
+            <div class="card-genres"><a href="/genre/aventura" class="genre-link">Aventura</a>, <a href="/genre/fantasia" class="genre-link">Fantasia</a></div>
+          </div>
+        </div>
+        <div class="movie-card-billboard">
+          <div class="poster-wrapper">
+            <img src="/static/posters/38757.jpg" alt="Tangled" loading="lazy">
+            <span class="rating-badge-card">7.4</span>
+            <div class="card-overlay"><p>Una princesa de larga cabellera dorada descubre el mundo exterior por primera vez.</p></div>
+          </div>
+          <div class="card-info">
+            <div class="card-title">Tangled</div>
+            <div class="card-meta"><span>2010</span></div>
+            <div class="card-genres"><a href="/genre/animacion" class="genre-link">Animacion</a>, <a href="/genre/comedia" class="genre-link">Comedia</a></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LLAMADA AL CHAT -->
+    <section class="billboard-section chat-cta">
+      <div class="cta-card">
+        <h2>¿No sabes qué ver?</h2>
+        <p>Cuéntame qué tipo de película buscas y te recomendaré las mejores opciones.</p>
+        <a href="/chat" class="btn btn-cine btn-lg">Habla con CineLogic</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="billboard-footer">
+
+    <div class="contenedor-datos-integrantes">
+
+      <p>Dato de los desarrolladores</p>
+
+      <p>Integrantes : </p>
+
+      <p>. Moscoso Huaman,Angel Oscar</p>
+
+      <p>. Miranda Hurtado, Gino Gustavo</p>
+
+      <p>Curso : Lenguajes de programación</p>
+
+      <p>Docente : Jose Antonio Espinal Tevez</p>
+
+
+
+    </div>
+
+
+    <div class="contenedor-logo">
+
+      <img src="../static/logoUtp.png" alt="" width="100%" class="img-logo" >
+
+    </div>
+
+  </footer>
+
+  <script>
+    fetch('/api/favorites').then(r => { if (r.ok) document.getElementById('navGroup').style.display = ''; }).catch(() => {});
+  </script>
+</body>
+
+</html>

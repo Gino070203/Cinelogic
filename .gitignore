@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.class
+target/
+.idea/
+.vscode/
+*.iml
+.DS_Store
+*.log
+dataset/*.csv

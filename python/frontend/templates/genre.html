@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">CineLogic - Genero</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/css/style.css?v=18" rel="stylesheet">
+  <link href="/static/css/billboard.css?v=10" rel="stylesheet">
+  <link rel="shortcut icon" href="../static/logo.png" type="image/x-icon">
+</head>
+
+<body>
+
+  <header class="billboard-header">
+    <div class="container-fluid d-flex align-items-center justify-content-between px-4">
+      <div class="d-flex align-items-center gap-3">
+        <img src="../static/logo.png" alt="CineLogic" height="50px">
+        <h1 class="mb-0">CineLogic</h1>
+      </div>
+      <div class="nav-group">
+        <a href="/">Cartelera</a>
+        <span class="nav-sep">|</span>
+        <a href="/chat">Chat</a>
+        <span class="nav-sep">|</span>
+        <a href="/favorites">Mis Favoritos</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="billboard-main">
+
+    <nav class="genre-nav" id="genreNav"></nav>
+
+    <section class="billboard-section">
+      <div class="section-header">
+        <h2 id="genreTitle">Cargando...</h2>
+      </div>
+      <div id="genreGrid" class="genre-grid">
+        <p class="detail-loading">Cargando peliculas...</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="movieOverlay" class="movie-overlay" style="display:none">
+    <div class="overlay-header">
+      <button class="btn-back-overlay" onclick="closeMovieOverlay()">&larr; Volver</button>
+    </div>
+    <div id="overlayContent" class="overlay-content"></div>
+  </div>
+
+  <footer class="billboard-footer">
+
+    <div class="contenedor-datos-integrantes">
+
+      <p>Dato de los desarrolladores</p>
+
+      <p>Integrantes : </p>
+
+      <p>. Moscoso Huaman,Angel Oscar</p>
+
+      <p>. Miranda Hurtado, Gino Gustavo</p>
+
+      <p>Curso : Lenguajes de programacion</p>
+
+      <p>Docente : Jose Antonio Espinal Tevez</p>
+
+    </div>
+
+    <div class="contenedor-logo">
+
+      <img src="../static/logoUtp.png" alt="" width="100%" class="img-logo" >
+
+    </div>
+
+  </footer>
+
+  <script src="/static/js/movie-overlay.js?v=3"></script>
+  <script>
+    const slug = location.pathname.split('/').pop();
+
+    fetch('/api/genres')
+      .then(r => r.json())
+      .then(data => {
+        const nav = document.getElementById('genreNav');
+        data.genres.forEach(g => {
+          const a = document.createElement('a');
+          a.href = '/genre/' + g.slug;
+          a.className = 'genre-nav-item' + (g.slug === slug ? ' active' : '');
+          a.textContent = g.name_es;
+          nav.appendChild(a);
+        });
+      })
+      .catch(function () {});
+
+    fetch('/api/genre/' + slug + '/movies')
+      .then(r => r.json())
+      .then(data => {
+        document.getElementById('genreTitle').textContent = 'Peliculas de ' + data.genre_es;
+        document.title = 'CineLogic - ' + data.genre_es;
+
+        const grid = document.getElementById('genreGrid');
+        grid.innerHTML = '';
+
+        if (!data.movies || data.movies.length === 0) {
+          grid.innerHTML = '<p class="detail-loading">No se encontraron peliculas de este genero.</p>';
+          return;
+        }
+
+        data.movies.forEach(m => {
+          const year = m.release_date ? String(m.release_date).slice(0, 4) : '';
+          const rating = m.vote_average || '';
+
+          let genresStr = '';
+          if (m.genres_es && m.genres_es.length) {
+            genresStr = m.genres_es
+              .map(g => '<a href="/genre/' + g.slug + '" class="genre-link">' + g.name_es + '</a>')
+              .join(', ');
+          }
+
+          const card = document.createElement('div');
+          card.className = 'movie-card-billboard';
+          card.style.cursor = 'pointer';
+          card.onclick = function () { showMovieDetail(m.id); };
+
+          const posterUrl = m.poster_url || '';
+          const imgHtml = posterUrl
+            ? '<img src="' + posterUrl + '" alt="' + m.title + '" loading="lazy" onerror="this.style.display=\'none\'">'
+            : '<div style="height:100%;display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:0.8rem">Sin imagen</div>';
+
+          card.innerHTML =
+            '<div class="poster-wrapper">' +
+              imgHtml +
+              (rating ? '<span class="rating-badge-card">' + rating + '</span>' : '') +
+            '</div>' +
+            '<div class="card-info">' +
+              '<div class="card-title">' + m.title + '</div>' +
+              (year ? '<div class="card-meta"><span>' + year + '</span></div>' : '') +
+              '<div class="card-genres">' + genresStr + '</div>' +
+            '</div>';
+
+          grid.appendChild(card);
+        });
+      })
+      .catch(function () {
+        document.getElementById('genreGrid').innerHTML = '<p class="detail-loading">Error al cargar las peliculas.</p>';
+      });
+  </script>
+
+</body>
+
+</html>

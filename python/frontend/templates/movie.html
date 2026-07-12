@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineLogic - Detalle</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/css/style.css?v=17" rel="stylesheet">
+  <link rel="shortcut icon" href="../static/logo.png" type="image/x-icon">
+  <style>
+    .detail-page { min-height: 100vh; background: var(--bg-dark); }
+    .detail-header { padding: 1rem 2rem; background: rgba(15,12,41,0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-glass); display: flex; align-items: center; gap: 1rem; }
+    .detail-header a { text-decoration: none; }
+    .detail-content { max-width: 1000px; margin: 0 auto; padding: 2rem; display: flex; gap: 2rem; flex-wrap: wrap; }
+    .detail-poster { width: 300px; border-radius: 14px; flex-shrink: 0; }
+    .detail-info { flex: 1; min-width: 280px; }
+    .detail-info h1 { color: var(--gold); font-size: 2rem; margin-bottom: 0.25rem; }
+    .detail-info .year { color: var(--text-muted); font-size: 1.1rem; }
+    .detail-info .rating { color: #ffc107; font-size: 1.1rem; margin-bottom: 1rem; }
+    .detail-info .overview { color: var(--text-light); font-size: 0.95rem; line-height: 1.7; margin-bottom: 1.5rem; }
+    .detail-info .cast { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .detail-info .cast strong { color: var(--text-light); }
+    .trailer-wrapper { margin-top: 1.5rem; width: 100%; max-width: 720px; }
+    .trailer-wrapper iframe { width: 100%; aspect-ratio: 16/9; border-radius: 12px; border: none; }
+    .detail-loading { text-align: center; padding: 4rem 1rem; color: var(--text-muted); font-size: 1.1rem; }
+  </style>
+</head>
+<body class="detail-page">
+  <div class="detail-header">
+    <div class="nav-group">
+      <a href="javascript:history.back()">← Volver</a>
+      <span class="nav-sep">|</span>
+      <a href="/">Cartelera</a>
+      <span class="nav-sep">|</span>
+      <a href="/chat">Chat</a>
+    </div>
+  </div>
+
+  <div id="movieDetail" class="detail-content">
+    <div class="detail-loading">⏳ Cargando información de la película...</div>
+  </div>
+
+  <script>
+    const movieId = location.pathname.split('/').pop();
+    fetch('/api/movie/' + movieId)
+      .then(r => {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(m => {
+        const year = m.release_date ? String(m.release_date).slice(0,4) : '';
+        const rating = m.vote_average ? `⭐ ${m.vote_average}` : '';
+        const poster = m.poster_url
+          ? `<img src="${m.poster_url}" alt="${m.title}" class="detail-poster">`
+          : '<div class="detail-poster" style="height:450px;background:var(--bg-card);border-radius:14px;display:flex;align-items:center;justify-content:center;color:var(--text-muted)">Sin imagen</div>';
+        const trailer = m.trailer_key
+          ? `<div class="trailer-wrapper"><h3 style="color:var(--gold);margin-bottom:0.5rem">▶ Tráiler</h3><iframe src="https://www.youtube.com/embed/${m.trailer_key}" allowfullscreen></iframe></div>`
+          : '<div class="trailer-wrapper"><p style="color:var(--text-muted)">No hay tráiler disponible.</p></div>';
+        const actors = m.actors && m.actors.length ? `<div class="cast"><strong>Reparto:</strong> ${m.actors.slice(0,5).join(', ')}</div>` : '';
+        const directors = m.directors && m.directors.length ? `<div class="cast"><strong>Dirección:</strong> ${m.directors.join(', ')}</div>` : '';
+
+        document.getElementById('movieDetail').innerHTML = `
+          ${poster}
+          <div class="detail-info">
+            <h1>${m.title}</h1>
+            ${year ? `<span class="year">(${year})</span>` : ''}
+            ${rating ? `<div class="rating">${rating}</div>` : ''}
+            <div class="overview">${m.overview || 'Sin descripción disponible.'}</div>
+            ${directors}
+            ${actors}
+            ${trailer}
+          </div>
+        `;
+      })
+      .catch(() => {
+        document.getElementById('movieDetail').innerHTML = '<div class="detail-loading">Error al cargar la información de esta película.</div>';
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+[MovieLoader] Loaded credits for 4803 movies
+[PrologBridge] SWI-Prolog detected: SWI-Prolog version 10.0.2 for x64-win64
+[ScalaBridge] Found JAR: C:\Users\GamingWorld\Documents\Proyecto_Lenguajes_Programacion\scala\target\scala-2.13\cinalogic-assembly-1.0.jar
+[TMDBClient] API key configured
+INFO:     127.0.0.1:4156 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4156 - "GET /static/css/style.css?v=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4157 - "GET /static/logo.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4156 - "GET /static/js/chat.js?v=20250101 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4156 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:4156 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4156 - "GET /static/css/style.css?v=3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4157 - "GET /static/logo.png HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4156 - "GET /static/js/chat.js?v=20250101 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4156 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:4159 - "POST /chat HTTP/1.1" 200 OK
+[PrologBridge] Cached 45707 facts for 4800 movies
+[PrologBridge] Fallback filtered 12 movies by prefs
+INFO:     127.0.0.1:4159 - "POST /chat HTTP/1.1" 200 OK
+[PrologBridge] Fallback filtered 0 movies by prefs
+INFO:     127.0.0.1:4200 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4201 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4212 - "POST /chat HTTP/1.1" 200 OK
+[PrologBridge] Fallback filtered 1722 movies by prefs
+INFO:     127.0.0.1:4212 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4213 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4232 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4233 - "POST /chat HTTP/1.1" 200 OK
+[PrologBridge] Fallback filtered 2 movies by prefs
+INFO:     127.0.0.1:4233 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4266 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4267 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4274 - "POST /chat HTTP/1.1" 200 OK
+[PrologBridge] Fallback filtered 1 movies by prefs
+INFO:     127.0.0.1:4274 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4275 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4315 - "POST /chat HTTP/1.1" 200 OK
+[PrologBridge] Prolog returned 21 movies
+INFO:     127.0.0.1:4315 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4316 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4346 - "POST /chat HTTP/1.1" 200 OK
+[PrologBridge] Prolog returned 32 movies
+INFO:     127.0.0.1:4346 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4347 - "POST /chat HTTP/1.1" 200 OK
+[PrologBridge] Fallback filtered 2296 movies by prefs
+INFO:     127.0.0.1:4347 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4373 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4375 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4393 - "POST /chat HTTP/1.1" 200 OK
+[PrologBridge] Fallback filtered 1274 movies by prefs
+INFO:     127.0.0.1:4394 - "POST /chat HTTP/1.1" 200 OK
+[PrologBridge] Fallback filtered 1274 movies by prefs
+INFO:     127.0.0.1:4414 - "POST /chat HTTP/1.1" 200 OK
+[PrologBridge] Fallback filtered 1274 movies by prefs
+INFO:     127.0.0.1:4415 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4422 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:4423 - "POST /chat HTTP/1.1" 200 OK
