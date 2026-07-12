@@ -146,11 +146,10 @@ def _attach_posters(movies):
 # Endpoint principal del chat: orquesta todos los módulos del sistema
 @router.post("/chat")
 async def chat(msg: ChatMessage, request: Request):
-    client_id = request.client.host
     user_text = msg.message
 
     # 1. Obtener o crear sesión para este cliente
-    session = conv_manager.get_or_create(client_id)
+    session = conv_manager.ensure(request.session)
 
     # ★ Si estábamos preguntando si conservar filtros, procesar la respuesta
     if session.get("step") == "ask_keep_filters":
@@ -161,8 +160,7 @@ async def chat(msg: ChatMessage, request: Request):
             # Mantener filtros → pasar al flujo normal para mostrar resultados
             session["step"] = "show_results"
         elif text_lower in ("no", "nope", "limpiar", "borrar", "clean", "empezar de nuevo"):
-            conv_manager.clear_secondary_filters(client_id)
-            session = conv_manager.get_or_create(client_id)
+            conv_manager.clear_secondary_filters(session)
             step = conv_manager.determine_next_step(session)
             session["step"] = step
             prefs = session["preferences"]
@@ -177,11 +175,10 @@ async def chat(msg: ChatMessage, request: Request):
             return {"response": response_gen.ask_genre_only()}
         else:
             # Usuario especificó un cambio específico (ej: "década 90s")
-            conv_manager.clear_secondary_filters(client_id)
-            session = conv_manager.get_or_create(client_id)
+            conv_manager.clear_secondary_filters(session)
             new_prefs = intent_parser.extract_preferences(user_text)
             no_pref = intent_parser.is_no_preference(user_text)
-            session = conv_manager.update_preferences(client_id, new_prefs, no_pref)
+            conv_manager.update_preferences(session, new_prefs, no_pref)
             step = conv_manager.determine_next_step(session)
             session["step"] = step
             if step == "ask_genre":
@@ -261,14 +258,12 @@ async def chat(msg: ChatMessage, request: Request):
                            "cambie de opinion", "mejor busco", "mejor quiero"]
 
     if any(kw in user_text.lower() for kw in hard_reset_keywords):
-        conv_manager.reset_session(client_id)
-        session = conv_manager.get_or_create(client_id)
+        conv_manager.reset(session)
         new_prefs = intent_parser.extract_preferences(user_text)
         no_pref = intent_parser.is_no_preference(user_text)
 
     elif any(kw in user_text.lower() for kw in soft_reset_keywords):
-        conv_manager.soft_reset_genre(client_id)
-        session = conv_manager.get_or_create(client_id)
+        conv_manager.soft_reset_genre(session)
         new_prefs = intent_parser.extract_preferences(user_text)
         no_pref = intent_parser.is_no_preference(user_text)
         if new_prefs.get("genres"):
@@ -280,16 +275,14 @@ async def chat(msg: ChatMessage, request: Request):
 
     # 4. Si hay nuevos géneros y ya había otros, reiniciar (cambio de preferencia)
     if new_prefs.get("genres") and session["preferences"].get("genres"):
-        conv_manager.reset_session(client_id)
-        session = conv_manager.get_or_create(client_id)
+        conv_manager.reset(session)
 
     # 5. Si hay resultados previos y se menciona actor/director, reiniciar
     if session.get("last_results") and (new_prefs.get("actor") or new_prefs.get("director")):
-        conv_manager.reset_session(client_id)
-        session = conv_manager.get_or_create(client_id)
+        conv_manager.reset(session)
 
     # 6. Actualizar sesión con nuevas preferencias y determinar el siguiente paso del flujo
-    session = conv_manager.update_preferences(client_id, new_prefs, no_pref)
+    conv_manager.update_preferences(session, new_prefs, no_pref)
     step = conv_manager.determine_next_step(session)
 
     # ★ Si el usuario dijo "probar otro género" pero no especificó cuál, forzar ask_genre
@@ -362,7 +355,7 @@ async def chat(msg: ChatMessage, request: Request):
     movies = movie_loader.get_movies_by_ids(candidate_ids)
 
     if not movies:
-        conv_manager.reset_session(client_id)
+        conv_manager.reset(session)
         return {"response": response_gen.no_results()}
 
     # 9. Ranking: por popularidad, por TF-IDF (Scala) o por calificación
