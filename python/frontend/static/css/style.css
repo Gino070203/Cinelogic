@@ -534,10 +534,25 @@ body {
   color: #ff6b81;
 }
 
+@media (max-width: 768px) {
+  .nav-group { flex-wrap: wrap; }
+  .header-nav { position: static; transform: none; justify-content: center; }
+  .detail-header { flex-wrap: wrap; }
+  .detail-layout .detail-poster { width: 100%; max-width: 280px; }
+  .fav-header { flex-direction: column; gap: 0.5rem; text-align: center; }
+  .fav-header h1 { font-size: 1.2rem; }
+}
+
 @media (max-width: 576px) {
   .bubble { max-width: 85%; }
   .cine-header h1 { font-size: 1.2rem; }
+  .cine-header .header-nav { position: static; transform: none; justify-content: center; margin-bottom: 0.5rem; }
+  .cine-header { display: flex; flex-direction: column; align-items: center; text-align: center; }
   .movie-poster { width: 120px; height: 180px; }
   .movie-card { gap: 14px; padding: 14px; }
   .cine-header { padding: 0.5rem 0; }
+  .auth-form { margin: 2rem auto; padding: 1.5rem; }
+  .detail-layout .detail-poster { width: 100%; max-width: 200px; }
+  .overlay-content { padding: 1rem; }
+  .genre-nav-item { font-size: 0.8rem; padding: 4px 12px; }
 }
