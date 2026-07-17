@@ -70,7 +70,8 @@ class ConversationManager:
         return session
 
     def reset(self, session):
-        session.clear()
+        for key in ["preferences", "step", "last_results", "offset", "pending_keep_filters"]:
+            session.pop(key, None)
         self.ensure(session)
 
     def soft_reset_genre(self, session):

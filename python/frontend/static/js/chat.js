@@ -116,13 +116,18 @@ chatContainer.addEventListener('click', async (e) => {
   const isFav = favoriteIds.includes(movieId);
   try {
     if (isFav) {
-      await fetch('/api/favorites/' + movieId, { method: 'DELETE' });
-      favoriteIds = favoriteIds.filter(id => id !== movieId);
+      const res = await fetch('/api/favorites/' + movieId, { method: 'DELETE' });
+      if (res.ok) {
+        favoriteIds = favoriteIds.filter(id => id !== movieId);
+        markHearts();
+      }
     } else {
-      await fetch('/api/favorites/' + movieId, { method: 'POST' });
-      favoriteIds.push(movieId);
+      const res = await fetch('/api/favorites/' + movieId, { method: 'POST' });
+      if (res.ok) {
+        favoriteIds.push(movieId);
+        markHearts();
+      }
     }
-    markHearts();
   } catch(e) {}
 });
 
